@@ -1,7 +1,10 @@
+* {
+  font-family: "nova round";
+}
+
 body {
   display: flex;
   justify-content: center;
-  font-family: novaround;
 }
 
 .quiz-container {
