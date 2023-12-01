@@ -1,0 +1,20 @@
+body {
+  display: flex;
+  justify-content: center;
+  font-family: novaround;
+}
+
+.quiz-container {
+  width: 1000px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#question1Btn,
+#question2Btn {
+  background-color: darkorange;
+  border-radius: 20px;
+  border: 0px;
+  width: 120px;
+  height: 30px;
+}
