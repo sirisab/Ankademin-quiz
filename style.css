@@ -3,18 +3,31 @@
 }
 
 body {
+  background-color: pink;
   display: flex;
   justify-content: center;
 }
 
 .quiz-container {
-  width: 1000px;
-  display: flex;
-  justify-content: space-evenly;
+  width: 600px;
 }
 
-#question1Btn,
-#question2Btn {
+fieldset {
+  border: 0px;
+  background-color: blue;
+  padding: 16px;
+  display: flex;
+  justify-content: space-around;
+
+  box-shadow: 5px 5px 5px red;
+}
+
+legend {
+  color: white;
+}
+
+#question1BtnA,
+#question1BtnB {
   background-color: darkorange;
   border-radius: 20px;
   border: 0px;
