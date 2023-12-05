@@ -36,7 +36,7 @@ let currentQuestionIndex = 0;
 let showQuestion = (array) => {
   let quizContainer = document.querySelector("#quizContainer");
   let text = document.createElement("p");
-  text.innerText = `${array[currentQuestionIndex].id} ${array[currentQuestionIndex].question}`;
+  text.innerText = `${array[currentQuestionIndex].id}. ${array[currentQuestionIndex].question}`;
   quizContainer.append(text);
 };
 
@@ -47,7 +47,15 @@ let showAnswers= (array) => {
   buttonA.innerText = `${array[currentQuestionIndex].answers.a}`;
   buttonB.innerText = `${array[currentQuestionIndex].answers.b}`;
   answerContainer.append(buttonA, buttonB);
+  buttonA.addEventListener("click", () => {
+    alert("Du har feeeel!");
+  })
+  buttonB.addEventListener("click", () => {
+    alert("Du har rätt!");
+  })
 };
+
+
 
 showQuestion(myQuestions);
 showAnswers(myQuestions);
