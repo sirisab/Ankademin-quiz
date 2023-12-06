@@ -93,6 +93,16 @@ const myQuestions = [
 
 ];
 
+let nightModeBtn = document.querySelector("#nightModeBtn");
+nightModeBtn.addEventListener("click", () => {
+  if (document.body.classList.contains("daymode")){
+    document.body.className = 'nightmode';
+  }
+  else {
+    document.body.className = 'daymode';
+  }
+})
+
 function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
 	function showQuestions(questions, quizContainer){
