@@ -1,9 +1,10 @@
 * {
   font-family: "nova round";
+  font-size: 20px;
 }
 
 body {
-  background-color: pink;
+  background-color: silver;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,18 +12,19 @@ body {
   padding: 10px;
 }
 
-#quizContainer {
+#quiz {
   display: flex;
+  flex-direction: column; 
   justify-content: center;
   width: 600px;
-  height: 80px;
-  background-color: red;
+  background-color: magenta;
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   color: white;
+  box-sizing: border-box;
 }
 
-#answerContainer {
+#results {
   display: flex;
   justify-content:space-around;
   align-items:center;
@@ -32,13 +34,33 @@ body {
   margin: 10px 10px 30px 10px;
   padding: 10px;
   color: white;
+  box-sizing: border-box;
 }
 
+#submitBtnContainer {
+  display: flex;
+  justify-content:space-around;
+  align-items:center;
+  width: 600px;
+  height: 80px;
+  background-color: red;
+  margin: 10px 10px 30px 10px;
+  padding: 10px;
+  color: white;
+  box-sizing: border-box;
+}
 
-button {
-  background-color: darkorange;
+.answers {
+  margin-bottom: 20px;
+}
+
+button, #submit {
+  background-color: rgb(151, 196, 255);
   border-radius: 20px;
   border: 0px;
-  width: 120px;
-  height: 30px;
+  padding: 13px;
+}
+
+.hide {
+  display: none;
 }
