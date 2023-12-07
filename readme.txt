@@ -20,21 +20,21 @@ Betyg G
 
  
 
-Quizet innehåller 10 frågor. Frågorna består av sant/falskt påståenden med två möjliga svarsalternativ: Sant eller Falskt.
+Quizet innehåller 10 frågor. Frågorna består av sant/falskt påståenden med två möjliga svarsalternativ: Sant eller Falskt. CHECK
 
 Användaren ska utöver att besvara frågor för quizet, även kunna byta utseende på sidan mellan dark mode 
-(dvs mörk bakgrundsfärg med ljus text ) och light mode (ljus bakgrundsfärg med mörk text).
+(dvs mörk bakgrundsfärg med ljus text ) och light mode (ljus bakgrundsfärg med mörk text). INTE RIKTIGT CHECK
 
-Användaren ska kunna besvara samtliga frågor och sedan klicka på en knapp för att se sitt resultat.
+Användaren ska kunna besvara samtliga frågor och sedan klicka på en knapp för att se sitt resultat. CHECK
 
 Skriv ut antal rätt som användaren fått. Använd även färg och text för att meddela användarens resultat 
-utefter följande kriterier:
+utefter följande kriterier: CHECK
 
-< 50% - Underkänt (röd)
+< 50% - Underkänt (röd) CHECK
 
-50%-75% - Bra (gul/orange)
+50%-75% - Bra (gul/orange) CHECK
 
-> 75% - Riktigt bra jobbat (grönt)
+> 75% - Riktigt bra jobbat (grönt) CHECK
 
 Du har gjort minst 8 commits till ditt Github-repository under projektets gång.
 
@@ -48,9 +48,9 @@ Alla G-krav är uppfyllda
 
 Frågorna ska bestå utav en blandning av följande typer (minst 2 av varje typ)
 
-Sant/falskt-påståenden - (Två svarsalternativ - Sant eller Falskt)
+Sant/falskt-påståenden - (Två svarsalternativ - Sant eller Falskt) CHECK
 
-Multiple choice - (Fyra svarsalternativ varav ett rätt svar)
+Multiple choice - (Fyra svarsalternativ varav ett rätt svar) CHECK
 
 Checkbox-svar (4 checkboxar med svarsalternativ - 2 eller 3 rätta svar, övriga felaktig).
 

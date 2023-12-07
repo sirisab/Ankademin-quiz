@@ -29,10 +29,12 @@ const myQuestions = [
   },
   {
     id: 4,
-    question: "Pauls backup-konto i Fortnite heter Pålenskåln.",
+    question: "Vad heter Pauls backup-konto i Fortnite?",
     answers: {
-      a: "Sant",
-      b: "Falskt"
+      a: "Pålenskåln",
+      b: "PauliSonni",
+      c: "BuBbEl",
+      d: "bombASTICsideeye"
     },
     correctAnswer: "a",
   },
@@ -56,10 +58,12 @@ const myQuestions = [
   },
   {
     id: 7,
-    question: "Både Johan och Siri har jobbat som värd.",
+    question: "Siris första jobb var:",
     answers: {
-      a: "Sant",
-      b: "Falskt",
+      a: "Reklamutdelare",
+      b: "Cirkusartist",
+      c: "Glassförsäljare",
+      d: "Statsminister"
     },
     correctAnswer: "a",
   },
@@ -93,13 +97,17 @@ const myQuestions = [
 
 ];
 
-let nightModeBtn = document.querySelector("#nightModeBtn");
+const nightModeBtn = document.querySelector("#nightModeBtn");
 nightModeBtn.addEventListener("click", () => {
   if (document.body.classList.contains("daymode")){
     document.body.className = 'nightmode';
+    nightModeBtn.innerHTML = ""
+    nightModeBtn.innerHTML = "&#9788"
   }
   else {
     document.body.className = 'daymode';
+    nightModeBtn.innerHTML = ""
+    nightModeBtn.innerHTML = "&#9790;"
   }
 })
 
@@ -107,7 +115,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
 	function showQuestions(questions, quizContainer){
     // we'll need a place to store the output and the answer choices
-    let output = [];
+    const output = [];
     let answers;
   
     // for each question...
@@ -130,7 +138,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
   
       // add this question and its answers to the output
       output.push(
-        '<div class="question">' + question.question + '</div>'
+        '<div class="question">' + question.id + ". " + question.question + '</div>'
         + '<div class="answers">' + answers.join('') + '</div>'
       );
     })
@@ -141,11 +149,11 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
 	function showResults(questions, quizContainer, resultsContainer) {
     // gather answer containers from our quiz
-    var answerContainers = quizContainer.querySelectorAll('.answers');
+    const answerContainers = quizContainer.querySelectorAll('.answers');
     
     // keep track of user's answers
-    var userAnswer = '';
-    var numCorrect = 0;
+    let userAnswer = '';
+    let numCorrect = 0;
   
     // for each question...
     questions.forEach((question, i) => {
@@ -163,12 +171,29 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
       // if answer is wrong or blank
       else {
         // color the answers red
-        answerContainers[i].style.color = 'red';
+        answerContainers[i].style.color = 'orange';
       }
     });
-  
+
+    // Remove existing color classes
+    resultsContainer.classList.remove("red", "yellow", "green");
+
+    // If-satser för olika resultat
+    if (numCorrect <= questions.length *0.5) {
+      resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length;
+      resultsContainer.classList.add("red");
+
+    }
+    else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
     // show number of correct answers out of total
-    resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+    resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length;
+    resultsContainer.classList.add("yellow");
+    }
+    else if (numCorrect >= questions.length*0.75) {
+    // show number of correct answers out of total
+    resultsContainer.innerHTML = 'Riktigt bra jobbat! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+    resultsContainer.classList.add("green");
+  }
   }
 
 	// show the questions
@@ -180,8 +205,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 	}
 }
 
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
+const quizContainer = document.getElementById('quiz');
+const resultsContainer = document.getElementById('results');
+const submitButton = document.getElementById('submit');
 
 generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
