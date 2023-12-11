@@ -1,14 +1,19 @@
 * {
   font-family: "afacad";
-  font-size: 22px;
+  font-size: 20px;
 }
 
 body {
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
   margin: 40px;
   padding: 10px;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 .daymode {
@@ -36,13 +41,20 @@ body {
   to {background-color: darkblue;}
 }
 
-#nightModeBtn {
-  font-size: 40px;
-  border-radius: 50px;
-  margin: 0px 0px 50px 0px;
+#nightModeBtnContainer {
+  display:flex;
+  flex-direction: column;
+  align-items:center;
 }
 
-#quiz {
+#nightModeBtn {
+  font-size: 40px;
+  border-radius: 100%;
+  margin: 0px 0px 0px 0px;
+  color: red;
+}
+
+.quiz {
   display: flex;
   flex-direction: column; 
   justify-content: center;
@@ -50,13 +62,11 @@ body {
   background-color: magenta;
   padding: 30px;
   box-sizing: border-box;
-
   box-shadow: 0px 0px 20px red;
 }
 
-div {
+#submitBtnContainer, .answers, .question {
   background-color: red;
-  
 }
 
 #results {
@@ -75,10 +85,12 @@ div {
 
 .yellow {
   background-color: orange;
+  color: brown;
 }
 
 .green {
   background-color:rgb(107, 186, 107);
+  color: darkgreen;
 }
 
 
@@ -94,11 +106,11 @@ div {
 }
 
 .question {
-  padding: 10px;
+  padding: 20px;
 }
 .answers {
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 20px;
 }
 
 button, #submit {
@@ -106,10 +118,6 @@ button, #submit {
   border-radius: 20px;
   border: 0px;
   padding: 13px;
-  margin: 10px;
-}
-
-input[type="radio"] {
   margin: 10px;
 }
 

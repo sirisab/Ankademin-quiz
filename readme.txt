@@ -52,7 +52,7 @@ Sant/falskt-påståenden - (Två svarsalternativ - Sant eller Falskt) CHECK
 
 Multiple choice - (Fyra svarsalternativ varav ett rätt svar) CHECK
 
-Checkbox-svar (4 checkboxar med svarsalternativ - 2 eller 3 rätta svar, övriga felaktig).
+Checkbox-svar (4 checkboxar med svarsalternativ - 2 eller 3 rätta svar, övriga felaktig). CHECK
 
 Användaren ska kunna se exakt vilka frågor hen besvarat rätt och/eller felaktigt när resultatet visas. 
 (Om hen besvarat frågan fel, bestämmer du själv om du vill skriva ut det rätta svaret eller inte).

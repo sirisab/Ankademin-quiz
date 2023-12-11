@@ -12,12 +12,14 @@ const myQuestions = [
   },
   {
     id: 2,
-    question: "Johan är DRIP.",
+    question: "Vem var Drottning Kristinas pappa?",
     answers: {
-      a: "Sant",
-      b: "Falskt",
+      a: "Gustav IV Adolf",
+      b: "Gustav III Adolf",
+      c: "Gustav I Adolf",
+      d: "Gustav II Adolf",
     },
-    correctAnswer: ["b"],
+    correctAnswer: ["d"],
     type: "radio",
   },
   {
@@ -64,12 +66,12 @@ const myQuestions = [
   },
   {
     id: 7,
-    question: "Siris första jobb var:",
+    question: "Astrid Lindgrens tecknare:",
     answers: {
-      a: "Reklamutdelare",
-      b: "Cirkusartist",
-      c: "Glassförsäljare",
-      d: "Statsminister"
+      a: "Ingrid Vang Nyman",
+      b: "Jan Lööf",
+      c: "Elsa Beskow",
+      d: "Ilon Wikland"
     },
     correctAnswer: ["a", "d"],
     type: "checkbox",
@@ -86,13 +88,15 @@ const myQuestions = [
   },
   {
     id: 9,
-    question: "Pauls nalle heter Pappa Björn.",
+    question: "Kryssa någon av Kajsa ankas systerdöttrar",
     answers: {
-      a: "Sant",
-      b: "Falskt"
+      a: "Kicki",
+      b: "Mimmi",
+      c: "Pippi",
+      d: "Titti",
     },
-    correctAnswer: ["b"],
-    type: "radio",
+    correctAnswer: ["a", "c", "d"],
+    type: "checkbox",
   },
   {
     id: 10,
@@ -107,23 +111,27 @@ const myQuestions = [
 
 ];
 
-
-
 //Nightmode/daymode-knapp
 
 const nightModeBtn = document.querySelector("#nightModeBtn");
+
 nightModeBtn.addEventListener("click", () => {
-  if (document.body.classList.contains("daymode")){
-    document.body.className = 'nightmode';
-    nightModeBtn.innerHTML = ""
-    nightModeBtn.innerHTML = "&#9788"
+  if (document.body.classList.contains("daymode")) {
+    toggleNightMode(true);
+  } else {
+    toggleNightMode(false);
   }
-  else {
-    document.body.className = 'daymode';
-    nightModeBtn.innerHTML = ""
-    nightModeBtn.innerHTML = "&#9790;"
-  }
-})
+});
+
+function toggleNightMode(isNightMode) {
+  document.body.className = isNightMode ? 'nightmode' : 'daymode';
+  nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
+  
+  // Loop through all elements with the class "question"
+  document.querySelectorAll('.question, .answers').forEach(questionDiv => {
+    questionDiv.style.backgroundColor = isNightMode ? "black" : ""; // Set background color or reset
+  });
+}
 
 function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
@@ -146,8 +154,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
           '<label>'
             + '<input type="radio" name="question'+i+'" value="'+letter+'">'
             
-            + question.answers[letter]
-          + '</label>'
+            + ' ' + question.answers[letter]
+          + '</label>' + '<br>'
         );
         // ... eller en checkbox.
       } else if (question.type === "checkbox"){
@@ -155,8 +163,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
           '<label>'
             + '<input type="checkbox" name="question'+i+'" value="'+letter+'">'
             
-            + question.answers[letter]
-          + '</label>'
+            + ' ' + question.answers[letter]
+          + '</label>' + '<br>'
         )
       }
       }
@@ -239,7 +247,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 	}
 }
 
-const quizContainer = document.getElementById('quiz');
+const quizContainer = document.querySelector('.quiz');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 
