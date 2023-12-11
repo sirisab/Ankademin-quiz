@@ -1,6 +1,6 @@
 * {
-  font-family: "nova round";
-  font-size: 14px;
+  font-family: "afacad";
+  font-size: 22px;
 }
 
 body {
@@ -16,6 +16,7 @@ body {
   color:darkblue;  
   animation-name: day;
   animation-duration: 1s;
+
 }
 
 @keyframes day {
@@ -38,6 +39,7 @@ body {
 #nightModeBtn {
   font-size: 40px;
   border-radius: 50px;
+  margin: 0px 0px 50px 0px;
 }
 
 #quiz {
@@ -48,10 +50,13 @@ body {
   background-color: magenta;
   padding: 30px;
   box-sizing: border-box;
+
+  box-shadow: 0px 0px 20px red;
 }
 
 div {
   background-color: red;
+  
 }
 
 #results {

@@ -36,7 +36,7 @@ utefter följande kriterier: CHECK
 
 > 75% - Riktigt bra jobbat (grönt) CHECK
 
-Du har gjort minst 8 commits till ditt Github-repository under projektets gång.
+Du har gjort minst 8 commits till ditt Github-repository under projektets gång. CHECK
 
  
 

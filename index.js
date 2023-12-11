@@ -3,99 +3,111 @@ const myQuestions = [
   {
     id: 1,
     question: "Chiles största ö heter Chileo.",
+    inputType: "radio",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 2,
     question: "Johan är DRIP.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 3,
     question: "Nintendos populäraste consol 2023 heter Nintendo Wii.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 4,
     question: "Vad heter Pauls backup-konto i Fortnite?",
+    type: "checkbox",
     answers: {
       a: "Pålenskåln",
       b: "PauliSonni",
       c: "BuBbEl",
       d: "bombASTICsideeye"
     },
-    correctAnswer: "a",
+    correctAnswer: ["a"],
   },
   {
     id: 5,
     question: "Paul heter egentligen Isis.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt"
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 6,
     question: "Vi äter Vanessamat på lördagar.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 7,
     question: "Siris första jobb var:",
+    type: "radio",
     answers: {
       a: "Reklamutdelare",
       b: "Cirkusartist",
       c: "Glassförsäljare",
       d: "Statsminister"
     },
-    correctAnswer: "a",
+    correctAnswer: ["a", "d"],
   },
   {
     id: 8,
     question: "Nintendos mest populära syskonpar heter Maria och Luigia.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 9,
     question: "Pauls nalle heter Pappa Björn.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt"
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   },
   {
     id: 10,
     question: "Siri är 100 år.",
+    type: "radio",
     answers: {
       a: "Sant",
       b: "Falskt"
     },
-    correctAnswer: "b",
+    correctAnswer: ["b"],
   }
 
 ];
+
+//Nightmode-knapp resp. daymode-knapp
 
 const nightModeBtn = document.querySelector("#nightModeBtn");
 nightModeBtn.addEventListener("click", () => {
@@ -111,35 +123,44 @@ nightModeBtn.addEventListener("click", () => {
   }
 })
 
+//Här börjar den stora quizfunktionen
 function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
 	function showQuestions(questions, quizContainer){
-    // we'll need a place to store the output and the answer choices
+    // Vi behöver någonstans att förvara outputen och svaren på frågorna
     const output = [];
     let answers;
   
-    // for each question...
+    //För varje fråga...
     questions.forEach((question, i) => {
-      // first reset the list of answers
-      answers = [];
+      // först nollställer vi listan av svar om det är första frågan
+      if (i === 0) {
+        answers = [];
+      }
   
-      // for each available answer to this question...
-      for(letter in question.answers){
-  
-        // ...add an html radio button
-        answers.push(
-          '<label>'
-            + '<input type="radio" name="question'+i+'" value="'+letter+'">'
-            
-            + question.answers[letter]
-          + '</label>'
+      // för varje tillgängligt svar på denna fråga...
+      for(let letter in question.answers.inputType) {
+
+        // avgör vilken input type som används på frågan
+      const inputType = question.inputType;
+
+      console.log("inputType", inputType);
+
+        // Lägg till en radio button/checkbox etc beroende på input type
+        answers.push(`
+            <label>
+              <input type="${inputType}" name="question${i}" value="${letter}">
+              ${letter}: ${question.answers[letter].text}
+            </label>
+          `
         );
       }
   
-      // add this question and its answers to the output
-      output.push(
-        '<div class="question">' + question.id + ". " + question.question + '</div>'
-        + '<div class="answers">' + answers.join('') + '</div>'
+      // Lägg till frågorna och svaren till output-arrayen
+      output.push(`
+        <div class="question">${question.id}. ${question.question}</div>
+        <div class="answers">${answers.join('')}</div>
+        `
       );
     })
   
@@ -182,7 +203,6 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     if (numCorrect <= questions.length *0.5) {
       resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length;
       resultsContainer.classList.add("red");
-
     }
     else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
     // show number of correct answers out of total
