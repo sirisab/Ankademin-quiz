@@ -2,7 +2,7 @@
 const myQuestions = [
   {
     id: 1,
-    question: "One Direction är väldigt kända!",
+    question: "One Direction har sålt över 70 miljoner skivor.",
     answers: {
       a: "Sant",
       b: "Falskt",
@@ -24,7 +24,7 @@ const myQuestions = [
   },
   {
     id: 3,
-    question: "Gruppen har inte lagt av, de är på paus sen 2015.",
+    question: "Gruppen har inte lagt av – de är på paus sen 2015.",
     answers: {
       a: "Sant",
       b: "Falskt",
@@ -34,7 +34,7 @@ const myQuestions = [
   },
   {
     id: 4,
-    question: "Vem slutade i One Direction?",
+    question: "Vem slutade i One Direction redan innan pausen?",
     answers: {
       a: "Harry",
       b: "Zayn",
@@ -47,10 +47,10 @@ const myQuestions = [
   },
   {
     id: 5,
-    question: "One Direction kommer från USA!",
+    question: "One Direction kommer från:",
     answers: {
-      a: "Sant",
-      b: "Falskt"
+      a: "USA!",
+      b: "Storbritannien!"
     },
     correctAnswer: ["b"],
     type: "radio",
@@ -67,7 +67,7 @@ const myQuestions = [
   },
   {
     id: 7,
-    question: "Vad hade 1D hetat om de inte tagit namnet One Direction?",
+    question: "Vad hade One Direction hetat om de inte tagit namnet One Direction?",
     answers: {
       a: "CNN",
       b: "TBA",
@@ -79,17 +79,17 @@ const myQuestions = [
   },
   {
     id: 8,
-    question: "One Direction bildades efter att ha tävlat i svenska Talang.",
+    question: "One Direction bildades efter att ha tävlat i X-Factor.",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: ["b"],
+    correctAnswer: ["a"],
     type: "radio",
   },
   {
     id: 9,
-    question: "Kryssa någon av One Directions låtar",
+    question: "Kryssa någon av One Directions låtar (en är fel)",
     answers: {
       a: "The Best Song Ever",
       b: "Sweet as a Cake",
@@ -225,13 +225,13 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     console.log(numCorrect);
     // If-satser för olika resultat
     if (numCorrect <= questions.length *0.5) {
-      resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length;
+      resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
       resultsContainer.classList.add("red");
 
     }
     else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
     // show number of correct answers out of total
-    resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length;
+    resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
     resultsContainer.classList.add("yellow");
     }
     else if (numCorrect >= questions.length*0.75) {
