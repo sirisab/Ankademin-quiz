@@ -2,51 +2,52 @@
 const myQuestions = [
   {
     id: 1,
-    question: "Chiles största ö heter Chileo.",
+    question: "One Direction är väldigt kända!",
     answers: {
       a: "Sant",
       b: "Falskt",
     },
-    correctAnswer: ["b"],
+    correctAnswer: ["a"],
     type: "radio",
   },
   {
     id: 2,
-    question: "Vem var Drottning Kristinas pappa?",
+    question: "Vad hette One Directions första singel?",
     answers: {
-      a: "Gustav IV Adolf",
-      b: "Gustav III Adolf",
-      c: "Gustav I Adolf",
-      d: "Gustav II Adolf",
+      a: "Stole My Heart",
+      b: "Up All Night",
+      c: "Gotta Be You",
+      d: "What Makes You Beautiful",
     },
     correctAnswer: ["d"],
     type: "radio",
   },
   {
     id: 3,
-    question: "Nintendos populäraste consol 2023 heter Nintendo Wii.",
+    question: "Gruppen har inte lagt av, de är på paus sen 2015.",
     answers: {
       a: "Sant",
       b: "Falskt",
-    },
-    correctAnswer: ["b"],
-    type: "radio",
-  },
-  {
-    id: 4,
-    question: "Vad heter Pauls backup-konto i Fortnite?",
-    answers: {
-      a: "Pålenskåln",
-      b: "PauliSonni",
-      c: "BuBbEl",
-      d: "bombASTICsideeye"
     },
     correctAnswer: ["a"],
     type: "radio",
   },
   {
+    id: 4,
+    question: "Vem slutade i One Direction?",
+    answers: {
+      a: "Harry",
+      b: "Zayn",
+      c: "Liam",
+      d: "Louie",
+      e: "Niall",
+    },
+    correctAnswer: ["b"],
+    type: "radio",
+  },
+  {
     id: 5,
-    question: "Paul heter egentligen Isis.",
+    question: "One Direction kommer från USA!",
     answers: {
       a: "Sant",
       b: "Falskt"
@@ -56,29 +57,29 @@ const myQuestions = [
   },
   {
     id: 6,
-    question: "Vi äter Vanessamat på lördagar.",
+    question: "One Directions fans kallas:",
     answers: {
-      a: "Sant",
-      b: "Falskt",
+      a: "Wandas",
+      b: "Directioners",
     },
     correctAnswer: ["b"],
     type: "radio",
   },
   {
     id: 7,
-    question: "Astrid Lindgrens tecknare:",
+    question: "Vad hade 1D hetat om de inte tagit namnet One Direction?",
     answers: {
-      a: "Ingrid Vang Nyman",
-      b: "Jan Lööf",
-      c: "Elsa Beskow",
-      d: "Ilon Wikland"
+      a: "CNN",
+      b: "TBA",
+      c: "YOLO",
+      d: "USP"
     },
-    correctAnswer: ["a", "d"],
-    type: "checkbox",
+    correctAnswer: ["d"],
+    type: "radio",
   },
   {
     id: 8,
-    question: "Nintendos mest populära syskonpar heter Maria och Luigia.",
+    question: "One Direction bildades efter att ha tävlat i svenska Talang.",
     answers: {
       a: "Sant",
       b: "Falskt",
@@ -88,25 +89,29 @@ const myQuestions = [
   },
   {
     id: 9,
-    question: "Kryssa någon av Kajsa ankas systerdöttrar",
+    question: "Kryssa någon av One Directions låtar",
     answers: {
-      a: "Kicki",
-      b: "Mimmi",
-      c: "Pippi",
-      d: "Titti",
+      a: "The Best Song Ever",
+      b: "Sweet as a Cake",
+      c: "You and I",
+      d: "Midnight Memories",
     },
     correctAnswer: ["a", "c", "d"],
     type: "checkbox",
   },
   {
     id: 10,
-    question: "Siri är 100 år.",
+    question: "Vem är Harry Styles?",
     answers: {
-      a: "Sant",
-      b: "Falskt"
+      a: "",
+      b: "",
+      c: "",
+      d: "",
+      e: "",
     },
-    correctAnswer: ["b"],
-    type: "radio",
+    correctAnswer: ["d"],
+    type: "image",
+    image: '241103e9531552680ce88b1bb3718b742850f1f7.webp'
   }
 
 ];
