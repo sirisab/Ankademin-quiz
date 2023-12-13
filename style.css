@@ -7,8 +7,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 40px;
-  padding: 10px;
+  margin: 0px;
+  padding: 0px;
   }
 
 #h1Container {
@@ -31,7 +31,7 @@ h1 {
   color:darkblue;  
   animation-name: day;
   animation-duration: 1s;
-  background-image: url("241103e9531552680ce88b1bb3718b742850f1f7.webp");
+  background-image: url("1d_färgglad.webp");
   background-size:auto;
 }
 
@@ -54,21 +54,16 @@ h1 {
   to {background-image: url("10878090-9360369732760584.jpeg");}
 }
 
-
-
 #nightModeBtn {
   width: 80px;
   font-size: 40px;
   border-radius: 100%;
-  margin: 0px 0px 0px 0px;
+  margin: 30px;
   color: red;
   opacity: 0.85;
 }
 
 .quiz {
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
   width: 600px;
   background-color: magenta;
   padding: 30px;
@@ -105,7 +100,6 @@ h1 {
   color: darkgreen;
 }
 
-
 #submitBtnContainer {
   display: flex;
   justify-content:space-around;
@@ -118,11 +112,19 @@ h1 {
 }
 
 .question {
-  padding: 20px;
+  padding: 30px 20px 20px 30px;
 }
 .answers {
-  margin-bottom: 20px;
-  padding: 20px;
+  margin: 0px 0px 20px 0px;
+  padding: 0px 20px 30px 30px;
+}
+
+input[type='radio'] {
+  margin: 0px 5px 0px 0px;
+}
+
+input[type='checkbox'] {
+  margin: 0px 5px 0px 0px;
 }
 
 button, #submit {
@@ -134,5 +136,5 @@ button, #submit {
 }
 
 .hide {
-  display: none;
+  display:none;
 }

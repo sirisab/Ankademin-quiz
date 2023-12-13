@@ -50,10 +50,12 @@ const myQuestions = [
     question: "One Direction kommer från:",
     answers: {
       a: "USA!",
-      b: "Storbritannien!"
+      b: "Storbritannien!",
+      c: "Irland!",
+      d: "Sverige!",
     },
-    correctAnswer: ["b"],
-    type: "radio",
+    correctAnswer: ["b", "c"],
+    type: "checkbox",
   },
   {
     id: 6,
@@ -111,13 +113,22 @@ const myQuestions = [
     },
     correctAnswer: ["d"],
     type: "image",
-    image: '241103e9531552680ce88b1bb3718b742850f1f7.webp'
+    imageA: 'Liam.jpeg',
+    imageB: 'Louis.jpeg',
+    imageC: 'Zayn.jpeg',
+    imageD: 'Harry.jpeg',
+    imageE: 'Niall.jpeg',
+  
   }
 
 ];
 
-//Nightmode/daymode-knapp
+//Variabler till senare
+const quizContainer = document.querySelector('.quiz');
+const resultsContainer = document.getElementById('results');
+const submitButton = document.getElementById('submit');
 
+//Nightmode/daymode-knapp
 const nightModeBtn = document.querySelector("#nightModeBtn");
 
 nightModeBtn.addEventListener("click", () => {
@@ -128,65 +139,75 @@ nightModeBtn.addEventListener("click", () => {
   }
 });
 
-function toggleNightMode(isNightMode) {
+//Vad som händer när man klickar på knappen - den byter mellan true och false
+const toggleNightMode = (isNightMode) => {
   document.body.className = isNightMode ? 'nightmode' : 'daymode';
   nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
   
-  // Loop through all elements with the class "question"
+  // När nightmode är på: växlar mellan två olika html-innehåll
   document.querySelectorAll('.question, .answers').forEach(questionDiv => {
     questionDiv.style.backgroundColor = isNightMode ? "black" : ""; // Set background color or reset
   });
 }
 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) => {
 
-	function showQuestions(questions, quizContainer){
-    // Här sparar vi output och svarsalternativen
+	const showQuestions = (questions, quizContainer) =>{
+    // Här sparar vi output och svarsalternativen och question till forEach nedan
     const output = [];
     let answers;
+    let question;
   
     // För varje fråga
-    questions.forEach((question, i) => {
+    questions.forEach((currentQuestion, i) => {
+      //Tilldela currentQuestion till question 
+      question = currentQuestion;
+
+      if (question) {
       // Först nollställer vi listan med svar
       answers = [];
   
       // För varje möjligt svar på frågan...
       for(letter in question.answers){
-  
         // lägger vi till en radiobutton...
-        if (question.type === "radio"){
-        answers.push(
-          '<label>'
-            + '<input type="radio" name="question'+i+'" value="'+letter+'">'
-            
-            + ' ' + question.answers[letter]
-          + '</label>' + '<br>'
-        );
-        // ... eller en checkbox.
-      } else if (question.type === "checkbox"){
-        answers.push(
-          '<label>'
-            + '<input type="checkbox" name="question'+i+'" value="'+letter+'">'
-            
-            + ' ' + question.answers[letter]
-          + '</label>' + '<br>'
-        )
+        if (question.type === "radio" || question.type === "checkbox"){
+          answers.push(
+            '<label>'
+              + '<input type="'+question.type+'"name="question'+i+'" value="'+letter+'">'
+              
+              + ' ' + question.answers[letter]
+            + '</label>' + '<br>'
+          );
+        }
       }
+
+      //Ny if-sats: Om det finns bildalternativ, lägg till dem
+      if (question.type === "image") {
+        for (imageLetter in question.answers) {
+          answers.push(
+            '<label>'            
+              + '<input type="radio" name="question'+i+'" value="'+imageLetter+'">'
+              + ' ' + question.answers[imageLetter]
+              + '<img src="'+ question['image' + imageLetter.toUpperCase()] + '">'
+            + '</label>' + '<br>'
+          );
+        }
       }
-   
+
       // Lägger till frågan och svaren i output
       output.push(
         '<div class="question">' + question.id + ". " + question.question + '</div>'
         + '<div class="answers">' + answers.join('') + '</div>'
       );
-    })
+      }
+    });;
     
-  
-    // Slutligen kombineras output-listan till en HTML-sträng och lägger den på sidan
+    // Slutligen läggs output-listan i HTML-form i quizContainer
     quizContainer.innerHTML = output.join('');
   }
 
-	function showResults(questions, quizContainer, resultsContainer) {
+	const showResults = (questions, quizContainer, resultsContainer) => {
+
     // Här skapas en variabel för alla divs med class answers (se ovan)
     const answerContainers = quizContainer.querySelectorAll('.answers');
     
@@ -214,46 +235,39 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
           // färga svaret orange
           answerContainers[i].style.color = 'orange';
         }
-      } else {
-
-
-      }
+      } 
   
-  
-    // Remove existing color classes
+    // Ta bort eventuella existerande färgklasser inför nästa steg
     resultsContainer.classList.remove("red", "yellow", "green");
-    console.log(numCorrect);
-    // If-satser för olika resultat
-    if (numCorrect <= questions.length *0.5) {
+
+     // If-satser för olika resultat: <50%
+     if (numCorrect <= questions.length *0.5) {
       resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
       resultsContainer.classList.add("red");
-
     }
+
+    // If-satser för olika resultat: 50-75%
     else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
-    // show number of correct answers out of total
+
     resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
     resultsContainer.classList.add("yellow");
     }
+    // If-satser för olika resultat: >75%
     else if (numCorrect >= questions.length*0.75) {
-    // show number of correct answers out of total
     resultsContainer.innerHTML = 'Riktigt bra jobbat! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
     resultsContainer.classList.add("green");
   }
 });
-  }
-  
+}
 
-	// show the questions
+	// Kör funktionen showQuestions
 	showQuestions(questions, quizContainer);
 
-	// when user clicks submit, show results
+	// Visa resultaten när användaren klickar på Submit
 	submitButton.onclick = function(){
 		showResults(questions, quizContainer, resultsContainer);
 	}
 }
 
-const quizContainer = document.querySelector('.quiz');
-const resultsContainer = document.getElementById('results');
-const submitButton = document.getElementById('submit');
-
+//Visa hela quizet
 generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
