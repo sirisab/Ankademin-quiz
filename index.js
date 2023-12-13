@@ -24,7 +24,7 @@ const myQuestions = [
   },
   {
     id: 3,
-    question: "Gruppen har inte lagt av – de är på paus sen 2015.",
+    question: "1D har inte lagt av! De tar bara en paus – sen 7 år tillbaka.",
     answers: {
       a: "Sant",
       b: "Falskt",
@@ -34,7 +34,7 @@ const myQuestions = [
   },
   {
     id: 4,
-    question: "Vem slutade i One Direction redan innan pausen?",
+    question: "Vem slutade i One Direction 2015?",
     answers: {
       a: "Harry",
       b: "Zayn",
@@ -47,7 +47,7 @@ const myQuestions = [
   },
   {
     id: 5,
-    question: "One Direction kommer från:",
+    question: "Medlemmarna i 1D kommer från två olika länder, nämligen:",
     answers: {
       a: "USA!",
       b: "Storbritannien!",
@@ -62,7 +62,7 @@ const myQuestions = [
     id: 6,
     question: "One Directions fans kallas:",
     answers: {
-      a: "Wandas",
+      a: "Wonders",
       b: "Directioners",
     },
     correctAnswer: ["b"],
@@ -70,7 +70,7 @@ const myQuestions = [
   },
   {
     id: 7,
-    question: "Vad hade One Direction hetat om de inte tagit namnet One Direction?",
+    question: "Vad hade 1D hetat om de inte tagit namnet One Direction?",
     answers: {
       a: "CNN",
       b: "TBA",
@@ -82,10 +82,11 @@ const myQuestions = [
   },
   {
     id: 8,
-    question: "One Direction bildades efter att ha tävlat i X-Factor.",
+    question: "One Direction bildades efter att ha tävlat i en talangjakt på tv. Vilken?",
     answers: {
-      a: "Sant",
-      b: "Falskt",
+      a: "X-Factor",
+      b: "American Idol",
+      c: "Britain's Got Talent"
     },
     correctAnswer: ["a"],
     type: "radio",
@@ -104,7 +105,7 @@ const myQuestions = [
   },
   {
     id: 10,
-    question: "Vem är Harry Styles?",
+    question: "Vem i One Direction är Harry Styles?",
     answers: {
       a: "",
       b: "",
@@ -119,9 +120,7 @@ const myQuestions = [
     imageC: 'Zayn.jpeg',
     imageD: 'Harry.jpeg',
     imageE: 'Niall.jpeg',
-  
   }
-
 ];
 
 //Variabler till senare
@@ -146,9 +145,16 @@ const toggleNightMode = (isNightMode) => {
   document.body.className = isNightMode ? 'nightmode' : 'daymode';
   nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
   
-  // Byter färg på div
+  // Nightmode - byter färg på element
   document.querySelectorAll('.question, .answers').forEach(questionDiv => {
-    questionDiv.style.backgroundColor = isNightMode ? "black" : ""; 
+    questionDiv.style.backgroundColor = isNightMode ? "darkblue" : ""; 
+    h1Container.style.backgroundColor = isNightMode ? "darkblue" : "";
+    document.querySelector('h1').style.color = isNightMode ? "white" : "";
+    quizContainer.style.backgroundColor = isNightMode ? "darkgrey" : "";
+    submitButton.style.backgroundColor = isNightMode ? "darkblue" : "";
+    document.querySelector('#submit').style.color = isNightMode ? "white" : "";
+    document.querySelector('#results').style.color = isNightMode ? "white" : "";
+
   });
 }
 
@@ -190,8 +196,9 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
       if (question.type === "image") {
         for (imageLetter in question.answers) {
           answers.push(
-            '<label>'            
+            '<label id="imageQuestion">'            
               + '<input type="radio" name="question'+i+'" value="'+imageLetter+'">'
+              + '<br>' 
               + ' ' + question.answers[imageLetter]
               + '<img src="'+ question['image' + imageLetter.toUpperCase()] + '">'
             + '</label>' + '<br>'
@@ -240,47 +247,53 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
           // färga svaret orange!
           answerContainers[i].style.backgroundColor = 'rgb(243, 88, 88)';
         }
+        // Om svarsalternativen har type checkbox...
+       } else if (question.type === "checkbox") {
+
+        let container = answerContainers[i];
+        let checkboxes = container.querySelectorAll("input[type='checkbox']");
+        
+        let passed = false;
+
+        let answers = Array.from(checkboxes).map(checkbox => {
+          if (checkbox.checked) {
+            return checkbox.value;
+          }
+        }).filter(value => value !== undefined);
+
+        if (answers.length > 0) {
+          passed = answers.every(answer => question.correctAnswer.includes(answer));
+        }
+        
+        if (passed) {
+          numCorrect++;
+          // och färga svaret grönt!
+          answerContainers[i].style.backgroundColor = 'rgb(148, 211, 155)';
+        }
+      // Om svaret är fel eller ej ifyllt...
+      else {
+        // färga svaret orange!
+        answerContainers[i].style.backgroundColor = 'rgb(243, 88, 88)';
       }
-
-      // // Om svarsalternativen har type checkbox ...
-      // else if (question.type === "checkbox") {
-      //     let correctCheckboxes = (checkReply, index) => {
-      //       // kollar vi igenom alla svaren:
-      //       userAnswer.forEach((answer, index) => {
-      //       // och om svaret är rätt ...
-      //       if (answer === correctAnswer[index]) {
-      //       // lägg till poäng på rätta svar-räknaren ...
-      //       NumCorrect++;
-      //       // och färga svaret grönt!
-      //       answerContainers[i].style.color = 'green';
-      //     } else if (answer !== correctAnswer[index]) {
-      //       // färga svaret orange!
-      //       answerContainers[i].style.color = 'orange';
-      //   }
-      //   })
-      //   }
-
-          
-      // }
-
+    }
     // Ta bort eventuella existerande färgklasser inför nästa steg
     resultsContainer.classList.remove("red", "yellow", "green");
 
      // If-satser för olika resultat: <50%
      if (numCorrect <= questions.length *0.5) {
-      resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+      resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length + '! Du är ingen riktig Directioner.';
       resultsContainer.classList.add("red");
     }
 
     // If-satser för olika resultat: 50-75%
     else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
 
-    resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+    resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length + '! Du är nästan en riktig Directioner!';
     resultsContainer.classList.add("yellow");
     }
     // If-satser för olika resultat: >75%
     else if (numCorrect >= questions.length*0.75) {
-    resultsContainer.innerHTML = 'Riktigt bra jobbat! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+    resultsContainer.innerHTML = 'Riktigt bra jobbat! Du fick ' + numCorrect + ' rätt av ' + questions.length + '! Du är en riktig Directioner!';
     resultsContainer.classList.add("green");
   }
 });
