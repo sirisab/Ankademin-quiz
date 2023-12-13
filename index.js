@@ -128,44 +128,30 @@ startBtn.addEventListener("click", () => {
   questionCard.classList.remove("hide");
   nextBtn.classList.remove("hide");
   
-  
-
-  //För varje fråga
-  questions.forEach ((question) => {
-  //Här sparar jag svaren:
-  let answers =[];
-  
-  //Och ifall frågan är av typen radio:
-  if (question.type === "radio") {
-
-    //Lägg till själva frågan
-    document.getElementById("questionCard").innerHTML = 
-      `Fråga ${question.id}: ${question.question}` 
-      console.log(question.id);
-    } else if (question.type === "checkbox") {
-
-      //Lägg till själva frågan
-      document.getElementById("questionCard").innerHTML = 
-        `Fråga ${question.id}: ${question.question}` 
-        console.log(question.id);
-      }
-  
-  });
-    // ... eller en checkbox.
-
-  });
+  //Visa första frågan
+  showQuestion(currentQuestionIndex);
+});
 
   //När man klickar på Next Button
-  nextBtn.addEventListener("click", (question) => {
-    currentQuestionIndex--;
-    document.getElementById("questionCard").innerHTML = 
-      `Fråga ${question.id}: ${question.question}`;
-      console.log(question.id);
-  })
-
-
-
-
-
+  nextBtn.addEventListener("click", () => {
+    currentQuestionIndex++;
   
+  //Visa nästa fråga
+  showQuestion(currentQuestionIndex);
+});
+
+//Funktion för att visa en specifik fråga
+let showQuestion = (index) => {
+  // Kontrollera om det finns fler frågor
+  if (index < questions.length) {
+    const question = questions[index]; 
+  // Visa frågan beroende på dess typ:
+  if (question.type === "radio" || question.type === "checkbox") {
+    document.getElementById("questionCard").innerHTML = `Fråga ${question.id}: ${question.question}`;
+  } else {
+    questionCard.classList.add("hide");
+    nextBtn.classList.add("hide");
+  }
+  }
+}
   
