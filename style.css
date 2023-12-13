@@ -73,7 +73,7 @@ h1 {
 }
 
 #submitBtnContainer, .answers, .question {
-  background-color: rgb(243, 88, 88);
+  background-color: rgb(116, 164, 246);
 }
 
 #results {
@@ -112,11 +112,11 @@ h1 {
 }
 
 .question {
-  padding: 30px 20px 20px 30px;
+  padding: 30px 20px 15px 30px;
 }
 .answers {
   margin: 0px 0px 20px 0px;
-  padding: 0px 20px 30px 30px;
+  padding: 15px 20px 30px 30px;
 }
 
 input[type='radio'] {

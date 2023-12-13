@@ -55,6 +55,7 @@ const myQuestions = [
       d: "Sverige!",
     },
     correctAnswer: ["b", "c"],
+    wrongAnswer: ["a", "d"],
     type: "checkbox",
   },
   {
@@ -131,6 +132,7 @@ const submitButton = document.getElementById('submit');
 //Nightmode/daymode-knapp
 const nightModeBtn = document.querySelector("#nightModeBtn");
 
+//Vad som händer när man klickar på knappen - den byter mellan true och false
 nightModeBtn.addEventListener("click", () => {
   if (document.body.classList.contains("daymode")) {
     toggleNightMode(true);
@@ -139,21 +141,24 @@ nightModeBtn.addEventListener("click", () => {
   }
 });
 
-//Vad som händer när man klickar på knappen - den byter mellan true och false
+// När nightmode är på: växlar mellan två olika html-innehåll
 const toggleNightMode = (isNightMode) => {
   document.body.className = isNightMode ? 'nightmode' : 'daymode';
   nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
   
-  // När nightmode är på: växlar mellan två olika html-innehåll
+  // Byter färg på div
   document.querySelectorAll('.question, .answers').forEach(questionDiv => {
-    questionDiv.style.backgroundColor = isNightMode ? "black" : ""; // Set background color or reset
+    questionDiv.style.backgroundColor = isNightMode ? "black" : ""; 
   });
 }
 
+// Funktionen som skapar quizet med alla delar
 const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) => {
 
+  //Funktionen som visar frågorna och svarsalternativen
 	const showQuestions = (questions, quizContainer) =>{
-    // Här sparar vi output och svarsalternativen och question till forEach nedan
+
+    // Här sparar vi output och svarsalternativen, och question till forEach nedan
     const output = [];
     let answers;
     let question;
@@ -196,22 +201,23 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
 
       // Lägger till frågan och svaren i output
       output.push(
-        '<div class="question">' + question.id + ". " + question.question + '</div>'
-        + '<div class="answers">' + answers.join('') + '</div>'
+        '<div class="question">' + question.id + ". " + question.question + '</div>' //Frågan
+        + '<div class="answers">' + answers.join('') + '</div>' //Svaret
       );
       }
     });;
     
-    // Slutligen läggs output-listan i HTML-form i quizContainer
+    // Slutligen läggs output-listan i HTML-form i quizContainer-diven
     quizContainer.innerHTML = output.join('');
   }
 
+  //Funktionen som visar resultatet
 	const showResults = (questions, quizContainer, resultsContainer) => {
 
-    // Här skapas en variabel för alla divs med class answers (se ovan)
+    // Här skapas en variabel för alla divs med class "answers"
     const answerContainers = quizContainer.querySelectorAll('.answers');
     
-    // Här räknar vi användarens svar
+    // Här kommer vi att räkna användarens svar, både vad den svarar och om det var rätt eller ej
     let userAnswer = '';
     let numCorrect = 0;
   
@@ -219,24 +225,44 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
     questions.forEach((question, i) => {
       // ...hitta vad användaren svarat
       userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
-      console.log(userAnswer);
 
-      // Om svarsalternativen har type radio ...
-      if(question.type === "radio" || question.type === "checkbox" ) {
+      // Om svarsalternativen har type radio eller image ...
+      if(question.type === "radio" || question.type === "image" ){
         // och om svaret är rätt ...
         if (question.correctAnswer.includes(userAnswer)) {
           // lägg till poäng på rätta svar-räknaren ...
           numCorrect++;
-          // och färga svaret grönt
-          answerContainers[i].style.color = 'green';
+          // och färga svaret grönt!
+          answerContainers[i].style.backgroundColor = 'rgb(148, 211, 155)';
         }
         // Om svaret är fel eller ej ifyllt...
         else {
-          // färga svaret orange
-          answerContainers[i].style.color = 'orange';
+          // färga svaret orange!
+          answerContainers[i].style.backgroundColor = 'rgb(243, 88, 88)';
         }
-      } 
-  
+      }
+
+      // // Om svarsalternativen har type checkbox ...
+      // else if (question.type === "checkbox") {
+      //     let correctCheckboxes = (checkReply, index) => {
+      //       // kollar vi igenom alla svaren:
+      //       userAnswer.forEach((answer, index) => {
+      //       // och om svaret är rätt ...
+      //       if (answer === correctAnswer[index]) {
+      //       // lägg till poäng på rätta svar-räknaren ...
+      //       NumCorrect++;
+      //       // och färga svaret grönt!
+      //       answerContainers[i].style.color = 'green';
+      //     } else if (answer !== correctAnswer[index]) {
+      //       // färga svaret orange!
+      //       answerContainers[i].style.color = 'orange';
+      //   }
+      //   })
+      //   }
+
+          
+      // }
+
     // Ta bort eventuella existerande färgklasser inför nästa steg
     resultsContainer.classList.remove("red", "yellow", "green");
 
