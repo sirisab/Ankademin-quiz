@@ -119,14 +119,19 @@ const myQuestions = [
 ];
 
 //Variabler
+const startBtn = document.querySelector("#startBtn");
+const nextBtn = document.querySelector("#nextBtn");
 const quizContainer = document.querySelector('.quiz');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
+let currentQuestionIndex = 0;
 
 //Nightmode/daymode-knapp:
 
+//Deklarerar och definierar variabeln
 const nightModeBtn = document.querySelector("#nightModeBtn");
 
+//Vad som händer när man klickar på knappen - byter mellan true och false
 nightModeBtn.addEventListener("click", () => {
   if (document.body.classList.contains("daymode")) {
     toggleNightMode(true);
@@ -135,20 +140,22 @@ nightModeBtn.addEventListener("click", () => {
   }
 });
 
+// När nightmode är på: växlar mellan två olika html-innehåll
 const toggleNightMode = (isNightMode) => {
   document.body.className = isNightMode ? 'nightmode' : 'daymode';
   nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
   
-  // Loopa genom alla element som har klassen "question" och "answers" och byt bakgrundsfärg:
+  // Loopa genom de element som har klassen "question" och "answers" och byt bakgrundsfärg:
   document.querySelectorAll('.question, .answers').forEach(questionDiv => {
     questionDiv.style.backgroundColor = isNightMode ? "black" : "";
   });
 }
 
+// Hela quizfunktionen skapas här
 const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) => {
 
 	const showQuestions = (questions, quizContainer) => {
-    // Här sparar vi arrayen output och svarsalternativen
+    // Här sparar vi arrayen "output" och svarsalternativen
     const output = [];
     let answers;
   
@@ -235,8 +242,8 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
   }
 });
 }
-	// Visa frågorna
-	showQuestions(questions, quizContainer);
+	// Kör funktionen showQuestions
+	showQuestions(questions, quizContainer, currentQuestionIndex);
 
 	// Visa resultaten när användaren klickar på Submit
 	submitButton.onclick = function(){
