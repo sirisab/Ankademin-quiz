@@ -154,4 +154,44 @@ let showQuestion = (index) => {
   }
   }
 }
+
+
+      // Om svarsalternativen har type radio ...
+      if(question.type === "radio" || question.type === "checkbox" ) {
+        // och om svaret är rätt ...
+        if (question.correctAnswer.includes(userAnswer)) {
+          // lägg till poäng på rätta svar-räknaren ...
+          numCorrect++;
+          // och färga svaret grönt
+          answerContainers[i].style.color = 'green';
+        }
+        // Om svaret är fel eller ej ifyllt...
+        else {
+          // färga svaret orange
+          answerContainers[i].style.color = 'orange';
+        }
+      } else {
+    }
+  
+    // Nollställ färger för det sammanlagda resultatet
+    resultsContainer.classList.remove("red", "yellow", "green");
+
+    // If-satser för olika resultat: <50%
+    if (numCorrect <= questions.length *0.5) {
+      resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+      resultsContainer.classList.add("red");
+    }
+
+    // If-satser för olika resultat: 50-75%
+    else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
+
+    resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+    resultsContainer.classList.add("yellow");
+    }
+    // If-satser för olika resultat: >75%
+    else if (numCorrect >= questions.length*0.75) {
+    resultsContainer.innerHTML = 'Riktigt bra jobbat! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
+    resultsContainer.classList.add("green");
+  }
+
   

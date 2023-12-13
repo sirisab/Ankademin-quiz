@@ -8,6 +8,58 @@ body {
   height: 100vh;
 }
 
+.daymode {
+  color:darkblue;  
+  animation-name: day;
+  animation-duration: 1s;
+  background-image: url("1d_färgglad.webp");
+  background-size:auto;
+}
+
+@keyframes day {
+  from {background-image: url("10878090-9360369732760584.jpeg");}
+  to {background-image: url("241103e9531552680ce88b1bb3718b742850f1f7.webp");}
+}
+
+.nightmode {
+  background-color: darkblue;
+  color: silver;
+  animation-name: night;
+  animation-duration: 1s;
+  background-image: url("10878090-9360369732760584.jpeg");
+  background-size:auto;
+}
+
+@keyframes night {
+  from {background-image: url("241103e9531552680ce88b1bb3718b742850f1f7.webp");}
+  to {background-image: url("10878090-9360369732760584.jpeg");}
+}
+
+#nightModeBtn {
+  width: 80px;
+  font-size: 40px;
+  border-radius: 100%;
+  margin: 30px;
+  color: red;
+  opacity: 0.85;
+}
+
+#h1Container {
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  background-color: rgb(151, 196, 255);
+  width: 100%;
+  opacity: 0.85;
+  margin: 20px;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 10px;
+  color: darkblue;
+}
+
 button {
   background-color:goldenrod;
   border-style: none;
