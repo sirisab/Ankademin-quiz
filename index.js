@@ -118,6 +118,11 @@ const myQuestions = [
 
 ];
 
+//Variabler
+const quizContainer = document.querySelector('.quiz');
+const resultsContainer = document.getElementById('results');
+const submitButton = document.getElementById('submit');
+
 //Nightmode/daymode-knapp:
 
 const nightModeBtn = document.querySelector("#nightModeBtn");
@@ -130,7 +135,7 @@ nightModeBtn.addEventListener("click", () => {
   }
 });
 
-function toggleNightMode(isNightMode) {
+const toggleNightMode = (isNightMode) => {
   document.body.className = isNightMode ? 'nightmode' : 'daymode';
   nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
   
@@ -140,9 +145,9 @@ function toggleNightMode(isNightMode) {
   });
 }
 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) => {
 
-	function showQuestions(questions, quizContainer){
+	const showQuestions = (questions, quizContainer) => {
     // Här sparar vi arrayen output och svarsalternativen
     const output = [];
     let answers;
@@ -178,11 +183,11 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     quizContainer.innerHTML = output.join('');
   }
 
-	function showResults(questions, quizContainer, resultsContainer) {
+	const showResults = (questions, quizContainer, resultsContainer) => {
     // Här skapas en variabel för alla divs med class answers (se ovan)
     const answerContainers = quizContainer.querySelectorAll('.answers');
     
-    // Här räknar vi användarens svar
+    // Här räknar vi användarens svar, dvs vad användaren valt och hur många rätt
     let userAnswer = '';
     let numCorrect = 0;
   
@@ -190,7 +195,6 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     questions.forEach((question, i) => {
       // ...hitta vad användaren svarat
       userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
-      console.log(userAnswer);
 
       // Om svarsalternativen har type radio ...
       if(question.type === "radio" || question.type === "checkbox" ) {
@@ -207,45 +211,39 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
           answerContainers[i].style.color = 'orange';
         }
       } else {
-
-
-      }
+    }
   
-  
-    // Remove existing color classes
+    // Nollställ färger för det sammanlagda resultatet
     resultsContainer.classList.remove("red", "yellow", "green");
-    console.log(numCorrect);
-    // If-satser för olika resultat
+
+    // If-satser för olika resultat: <50%
     if (numCorrect <= questions.length *0.5) {
       resultsContainer.innerHTML = 'Underkänt! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
       resultsContainer.classList.add("red");
-
     }
+
+    // If-satser för olika resultat: 50-75%
     else if (numCorrect >= questions.length*0.5 && numCorrect <= questions.length*0.75) {
-    // show number of correct answers out of total
+
     resultsContainer.innerHTML = 'Bra! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
     resultsContainer.classList.add("yellow");
     }
+    // If-satser för olika resultat: >75%
     else if (numCorrect >= questions.length*0.75) {
-    // show number of correct answers out of total
     resultsContainer.innerHTML = 'Riktigt bra jobbat! Du fick ' + numCorrect + ' rätt av ' + questions.length + '!';
     resultsContainer.classList.add("green");
   }
 });
-  }
-  
-
-	// show the questions
+}
+	// Visa frågorna
 	showQuestions(questions, quizContainer);
 
-	// when user clicks submit, show results
+	// Visa resultaten när användaren klickar på Submit
 	submitButton.onclick = function(){
 		showResults(questions, quizContainer, resultsContainer);
 	}
 }
 
-const quizContainer = document.querySelector('.quiz');
-const resultsContainer = document.getElementById('results');
-const submitButton = document.getElementById('submit');
+//Visa hela quizet
 
 generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
