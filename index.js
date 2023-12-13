@@ -50,10 +50,12 @@ const myQuestions = [
     question: "One Direction kommer från:",
     answers: {
       a: "USA!",
-      b: "Storbritannien!"
+      b: "Storbritannien!",
+      c: "Irland!",
+      d: "Sverige!"
     },
-    correctAnswer: ["b"],
-    type: "radio",
+    correctAnswer: ["b", "c"],
+    type: "checkbox",
   },
   {
     id: 6,
@@ -116,7 +118,7 @@ const myQuestions = [
 
 ];
 
-//Nightmode/daymode-knapp
+//Nightmode/daymode-knapp:
 
 const nightModeBtn = document.querySelector("#nightModeBtn");
 
@@ -132,20 +134,20 @@ function toggleNightMode(isNightMode) {
   document.body.className = isNightMode ? 'nightmode' : 'daymode';
   nightModeBtn.innerHTML = isNightMode ? "&#9788;" : "&#9790;";
   
-  // Loop through all elements with the class "question"
+  // Loopa genom alla element som har klassen "question" och "answers" och byt bakgrundsfärg:
   document.querySelectorAll('.question, .answers').forEach(questionDiv => {
-    questionDiv.style.backgroundColor = isNightMode ? "black" : ""; // Set background color or reset
+    questionDiv.style.backgroundColor = isNightMode ? "black" : "";
   });
 }
 
 function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
 	function showQuestions(questions, quizContainer){
-    // Här sparar vi output och svarsalternativen
+    // Här sparar vi arrayen output och svarsalternativen
     const output = [];
     let answers;
   
-    // För varje fråga
+    // För varje fråga:
     questions.forEach((question, i) => {
       // Först nollställer vi listan med svar
       answers = [];
@@ -153,25 +155,15 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
       // För varje möjligt svar på frågan...
       for(letter in question.answers){
   
-        // lägger vi till en radiobutton...
-        if (question.type === "radio"){
+        // lägger vi till en radiobutton/checkbox
+
         answers.push(
           '<label>'
-            + '<input type="radio" name="question'+i+'" value="'+letter+'">'
+            + '<input type="'+question.type+'"name="question'+i+'" value="'+letter+'">'
             
             + ' ' + question.answers[letter]
           + '</label>' + '<br>'
         );
-        // ... eller en checkbox.
-      } else if (question.type === "checkbox"){
-        answers.push(
-          '<label>'
-            + '<input type="checkbox" name="question'+i+'" value="'+letter+'">'
-            
-            + ' ' + question.answers[letter]
-          + '</label>' + '<br>'
-        )
-      }
       }
    
       // Lägger till frågan och svaren i output
@@ -182,7 +174,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     })
     
   
-    // Slutligen kombineras output-listan till en HTML-sträng och lägger den på sidan
+    // Slutligen läggs output-listan i quizContainer
     quizContainer.innerHTML = output.join('');
   }
 
