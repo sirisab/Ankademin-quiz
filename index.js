@@ -14,9 +14,9 @@ const myQuestions = [
     id: 2,
     question: "Vad hette One Directions första singel?",
     answers: {
-      a: "Stole My Heart",
-      b: "Up All Night",
-      c: "Gotta Be You",
+      a: "Story Of My Life",
+      b: "You & I",
+      c: "Best Song Ever",
       d: "What Makes You Beautiful",
     },
     correctAnswer: ["d"],
@@ -95,9 +95,9 @@ const myQuestions = [
     id: 9,
     question: "Kryssa någon av One Directions låtar (en är fel)",
     answers: {
-      a: "The Best Song Ever",
-      b: "Sweet as a Cake",
-      c: "You and I",
+      a: "Drag Me Down",
+      b: "Sweet As a Cake",
+      c: "Kiss You",
       d: "Midnight Memories",
     },
     correctAnswer: ["a", "c", "d"],
@@ -105,7 +105,7 @@ const myQuestions = [
   },
   {
     id: 10,
-    question: "Vem i One Direction är Harry Styles?",
+    question: "Vem är Harry Styles, som har den mest framgångsrika solokarriären av de fem medlemmarna?",
     answers: {
       a: "",
       b: "",
@@ -227,25 +227,44 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
     // Här kommer vi att räkna användarens svar, både vad den svarar och om det var rätt eller ej
     let userAnswer = '';
     let numCorrect = 0;
-  
+    
+
     // För varje fråga...
     questions.forEach((question, i) => {
       // ...hitta vad användaren svarat
       userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
 
+      // En funktioner vi strax behöver för att visa om svaren är rätt eller fel
+
+      const answerPassed = () => {
+        numCorrect++;
+                // och färga svaret grönt!
+                if (document.body.classList.contains("nightmode")) {
+                  answerContainers[i].style.backgroundColor = 'rgb(25, 46, 25)';
+                }
+              else if (document.body.classList.contains("daymode")) {
+                answerContainers[i].style.backgroundColor = 'rgb(148, 211, 155)';
+                }
+      }
+
+      const answerFailed = () => {
+        // färga svaret orange!
+        if (document.body.classList.contains("nightmode")) {
+          answerContainers[i].style.backgroundColor = 'rgb(82, 15, 15)';
+          }
+         else if (document.body.classList.contains("daymode")) {
+          answerContainers[i].style.backgroundColor = 'rgb(243, 88, 88)';
+          }
+      }
       // Om svarsalternativen har type radio eller image ...
       if(question.type === "radio" || question.type === "image" ){
         // och om svaret är rätt ...
         if (question.correctAnswer.includes(userAnswer)) {
-          // lägg till poäng på rätta svar-räknaren ...
-          numCorrect++;
-          // och färga svaret grönt!
-          answerContainers[i].style.backgroundColor = 'rgb(148, 211, 155)';
+          answerPassed()
         }
         // Om svaret är fel eller ej ifyllt...
         else {
-          // färga svaret orange!
-          answerContainers[i].style.backgroundColor = 'rgb(243, 88, 88)';
+          answerFailed()
         }
         // Om svarsalternativen har type checkbox...
        } else if (question.type === "checkbox") {
@@ -264,17 +283,14 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
         if (answers.length > 0) {
           passed = answers.every(answer => question.correctAnswer.includes(answer));
         }
-        
+
         if (passed) {
-          numCorrect++;
-          // och färga svaret grönt!
-          answerContainers[i].style.backgroundColor = 'rgb(148, 211, 155)';
+          answerPassed()
         }
-      // Om svaret är fel eller ej ifyllt...
-      else {
-        // färga svaret orange!
-        answerContainers[i].style.backgroundColor = 'rgb(243, 88, 88)';
-      }
+        // Om svaret är fel eller ej ifyllt...
+        else {
+          answerFailed()
+        }
     }
     // Ta bort eventuella existerande färgklasser inför nästa steg
     resultsContainer.classList.remove("red", "yellow", "green");
@@ -304,9 +320,11 @@ const generateQuiz = (questions, quizContainer, resultsContainer, submitButton) 
 
 	// Visa resultaten när användaren klickar på Submit
 	submitButton.onclick = function(){
+    resultsContainer.classList.remove("hide")
 		showResults(questions, quizContainer, resultsContainer);
 	}
 }
 
 //Visa hela quizet
 generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+

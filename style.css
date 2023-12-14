@@ -42,22 +42,23 @@ h1 {
 }
 
 @keyframes day {
-  from {background-image: url("10878090-9360369732760584.jpeg");}
+  from {background-image: url("dark_1d.webp");}
   to {background-image: url("1d_färgglad.webp");}
 }
 
 .nightmode {
-  background-color: darkblue;
+  background-color: black;
   color: rgb(235, 231, 231);
   animation-name: night;
   animation-duration: 1s;
-  background-image: url("10878090-9360369732760584.jpeg");
+  background-image: url("dark_1d.webp");
+  background-attachment: fixed;
   background-size: contain;
 }
 
 @keyframes night {
   from {background-image: url("1d_färgglad.webp");}
-  to {background-image: url("10878090-9360369732760584.jpeg");}
+  to {background-image: url("dark_1d.webp");}
 }
 
 #nightModeBtn {
@@ -80,7 +81,7 @@ h1 {
 }
 
 .question {
-  padding: 30px 20px 15px 30px;
+  padding: 30px 20px 20px 30px;
 }
 .answers {
   margin: 0px 0px 20px 0px;
@@ -124,11 +125,11 @@ input[type='checkbox'] {
   justify-content:space-around;
   align-items:center;
   width: 700px;
-  height: 80px;
+  height: 90px;
   background-color: red;
-  padding: 10px;
+  padding:20px;
   box-sizing: border-box;
-  box-shadow: 0px 0px 20px red;
+  box-shadow: 0px 0px 20px red; 
 }
 
 button, #submit {
@@ -148,14 +149,13 @@ img {
   justify-content:space-around;
   align-items:center;
   width: 700px;
-  height: 80px;
-  padding: 10px;
+  height: 100px;
+  padding: 10px 0px 30px 0px;
   margin-bottom: 100px;
   box-sizing: border-box;
-  box-shadow: 0px 0px 20px red;
   color: black;
 }
 
 .hide {
-  display:none;
+ display: none;
 }
